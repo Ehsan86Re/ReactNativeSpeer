@@ -12,7 +12,9 @@
    useColorScheme
  } from 'react-native';
  import { Provider } from 'react-redux';
+ import { NavigationContainer } from '@react-navigation/native';
  import store from "./utils/store";
+ import Main from "./navigation/main"
  
  function App(): React.JSX.Element {
    const isDarkMode = useColorScheme() === 'dark';
@@ -24,6 +26,9 @@
            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
          />
          <Provider store={store}>
+           <NavigationContainer>
+             <Main />
+           </NavigationContainer>
          </Provider>
        </SafeAreaView>
      </GestureHandlerRootView>
