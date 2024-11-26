@@ -8,10 +8,29 @@ type User = {
     description?: string
 };
 
+type UserStateType = Record<string, {
+    data: User | null,
+    loading: boolean,
+    error: string
+}>
+
 type HomeStateType = {
     data: User | null,
     loading: boolean,
     error: string
+}
+
+type UsersStateType = Record<string, {
+    data: User[] | null,
+    loading: boolean,
+    error: string,
+    endReached: boolean
+}>
+
+type GetUsersPayloadType = {
+    id: string,
+    type: 'following' | 'followers',
+    pageNumber?: number
 }
 
 type GetUserPayloadType = {
@@ -20,4 +39,4 @@ type GetUserPayloadType = {
 }
 
 
-export type { User, GetUserPayloadType, HomeStateType };
+export type { User, UserStateType, UsersStateType, GetUsersPayloadType, GetUserPayloadType, HomeStateType };

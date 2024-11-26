@@ -21,3 +21,25 @@ export async function getUserAPI(userName: string) {
         return "User Not Found"
     }
 };
+
+export async function getListAPI(userName: string, type: 'followers' | 'following', pageNumber?: number) {
+    try {
+        const response = await fetch(`https://api.github.com/users/${userName}/${type}?page=${pageNumber ?? 1}`, { 
+            method: 'get',
+            headers: new Headers({
+                'Authorization': `Bearer ${API_TOKEN}`,
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28'
+            }),
+        });
+        const json = await response.json();
+
+        if (json && json.length) {
+            return json
+        } else {
+            return "Something went wrong!"
+        }
+    } catch(e) {
+        return "Something went wrong!"
+    }
+};
